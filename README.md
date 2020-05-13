@@ -76,7 +76,22 @@ def get(key):
         return None
 ```
 
+according to the definiation of bloom filter, we have formula below
 
+n = ceil(m / (-k / log(1 - exp(log(p) / k))))
 
+p = pow(1 - exp(-k / (m / n)), k)
 
+m = ceil((n * log(p)) / log(1 / pow(2, log(2))));
 
+k = round((m / n) * log(2));
+
+And we have assumption that 0.05 false postives rate p is accaptable. n is 1 millions which is 1000000. 
+
+after calculation, 
+
+number of bits in the filter m = 6235225
+
+number of hashes k = 4
+
+reference: https://hur.st/bloomfilter/?n=1000000&p=0.05&m=&k=
